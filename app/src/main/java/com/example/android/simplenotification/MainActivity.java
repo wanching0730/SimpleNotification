@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         notification = new NotificationCompat.Builder(this);
+
+        //cancel the icon after view the notification
         notification.setAutoCancel(true);
     }
 
@@ -31,9 +33,12 @@ public class MainActivity extends AppCompatActivity {
         notification.setContentText("i am the body of the notification");
 
         Intent intent = new Intent(this, MainActivity.class);
+
+        //some notifications will lead to another apps
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
 
+        //go out of the current apps follow the notification (NOTIFICATION_SERVICE can do this)
         NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         nm.notify(uniqueID, notification.build());
 
